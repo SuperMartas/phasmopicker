@@ -10,7 +10,7 @@ const Footer = ({ handleClick }) => {
 
   return (
     <div className={css.footer}>
-      <Typography>App is created by dzybaty</Typography>
+      <Typography>App is created by dzybaty & modified by SuperMartas</Typography>
     </div>
   );
 };
