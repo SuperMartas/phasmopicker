@@ -4,7 +4,7 @@ export default makeStyles(({ palette }) => ({
   footer: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     width: '100%',
     marginTop: 10,
     background: palette.primary.main,
