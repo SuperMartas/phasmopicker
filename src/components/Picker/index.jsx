@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import clipboardCopy from 'clipboard-copy';
 import { send } from '@giantmachines/redux-websocket';
 
+import Grid from "@material-ui/core/Grid";
 import Slide from '@material-ui/core/Slide';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
@@ -157,10 +158,12 @@ const Picker = ({ changePage, resetSession }) => {
           <CustomButton type="quest" color="grey" text={SMUDGE} handleClick={handleQuestButtonClick} />
           <CustomButton type="quest" color="grey" text={TEMPERATURE_QUEST} handleClick={handleQuestButtonClick} />
         </Box>
-        <Box className={css.ghostsWrapper}>
+        <Grid container className={css.ghostsWrapper}>
           {
             ghosts.map((ghost) => (
-              <GhostCard data={ghost} key={ghost.name} selectedEvidences={selectedEvidences} />
+              <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={ghost.name}>
+                <GhostCard data={ghost} selectedEvidences={selectedEvidences} />
+              </Grid>
             ))
           }
           {
@@ -172,7 +175,7 @@ const Picker = ({ changePage, resetSession }) => {
               </Box>
             ) : null
           }
-        </Box>
+        </Grid>
       </Box>
     </Slide>
   );
