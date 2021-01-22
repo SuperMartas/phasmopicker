@@ -27,18 +27,24 @@ const GhostCard = ({ data, selectedEvidences }) => {
     <Fade in={isOpen} timeout={1000}>
       <Box className={css.root}>
         <Typography variant="h4" className={css.header}>{name}</Typography>
-        <Typography variant="h6" color="secondary">Evidences</Typography>
-        {
-          evidences.map((el) => (
-            <Box key={el}>
-              <Typography className={selectedEvidences.includes(el) ? css.accent : ''}>{el}</Typography>
-            </Box>
-          ))
-        }
-        <Typography variant="h6">Strength</Typography>
-        <Typography className={css.content}>{strength}</Typography>
-        <Typography variant="h6">Weakness</Typography>
-        <Typography className={css.content}>{weakness}</Typography>
+        <Box className={css.section}>
+          <Typography variant="h6">Evidences</Typography>
+          {
+            evidences.map((el) => (
+              <Box key={el}>
+                <Typography className={selectedEvidences.includes(el) ? css.accent : css.notFound}>{el}</Typography>
+              </Box>
+            ))
+          }
+        </Box>
+        <Box className={[css.section, css.strengthWrapper].join(' ')}>
+          <Typography variant="h6">Strength</Typography>
+          <Typography className={css.content}>{strength}</Typography>
+        </Box>
+        <Box className={[css.section, css.weaknessWrapper].join(' ')}>
+          <Typography variant="h6">Weakness</Typography>
+          <Typography className={css.content}>{weakness}</Typography>
+        </Box>
       </Box>
     </Fade>
   );
