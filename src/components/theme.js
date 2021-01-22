@@ -21,6 +21,7 @@ export default createMuiTheme({
         fontFamily: 'SyneMono',
         '@media screen and (max-width: 1000px)': {
         },
+        textAlign: 'justify',
       },
 
       h3: {
