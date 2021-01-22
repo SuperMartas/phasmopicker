@@ -13,21 +13,21 @@ const ghosts = [
 
   {
     name: 'Demon',
-    evidences: [TEMPERATURE, GHOST_WRITING, SPIRIT_BOX],
+    evidences: [GHOST_WRITING, SPIRIT_BOX, TEMPERATURE],
     strength: 'Extremely aggressive',
     weakness: 'Using the Ouija board to ask questions does not drain sanity',
   },
 
   {
     name: 'Jinn',
-    evidences: [EMF, SPIRIT_BOX, GHOST_ORB],
+    evidences: [EMF, GHOST_ORB, SPIRIT_BOX],
     strength: 'Moves faster the further away you are from it',
     weakness: 'Cutting off the location’s power supply will limit the Jinn’s speed',
   },
 
   {
     name: 'Mare',
-    evidences: [TEMPERATURE, SPIRIT_BOX, GHOST_ORB],
+    evidences: [GHOST_ORB, SPIRIT_BOX, TEMPERATURE],
     strength: 'Attacks more frequently in the dark, tends to switch off lights',
     weakness: 'Keeping the lights on',
   },
@@ -41,14 +41,14 @@ const ghosts = [
 
   {
     name: 'Phantom',
-    evidences: [EMF, TEMPERATURE, GHOST_ORB],
+    evidences: [EMF, GHOST_ORB, TEMPERATURE],
     strength: 'Looking at the Phantom will reduce your sanity',
     weakness: 'Capturing a photo will cause it to disappear, not during a hunt',
   },
 
   {
     name: 'Poltergeist',
-    evidences: [FINGERPRINTS, SPIRIT_BOX, GHOST_ORB],
+    evidences: [GHOST_ORB, FINGERPRINTS, SPIRIT_BOX],
     strength: 'Throws multiple objects about at once',
     weakness: 'Rooms without any stuff in to throw',
   },
@@ -62,7 +62,7 @@ const ghosts = [
 
   {
     name: 'Shade',
-    evidences: [EMF, GHOST_WRITING, GHOST_ORB],
+    evidences: [EMF, GHOST_ORB, GHOST_WRITING],
     strength: 'Minimal activity, hard to find and detect',
     weakness: 'Does not hunt if players are in a group',
   },
@@ -76,14 +76,14 @@ const ghosts = [
 
   {
     name: 'Wraith',
-    evidences: [FINGERPRINTS, TEMPERATURE, SPIRIT_BOX],
+    evidences: [FINGERPRINTS, SPIRIT_BOX, TEMPERATURE],
     strength: 'Can fly through walls and does not leave footprints',
     weakness: 'Salt is toxic for Wraith',
   },
 
   {
     name: 'Yurei',
-    evidences: [TEMPERATURE, GHOST_WRITING, GHOST_ORB],
+    evidences: [GHOST_ORB, GHOST_WRITING, TEMPERATURE],
     strength: 'Drains player sanity especially quickly',
     weakness: 'Smudge stick in the same room will stop the Yurei from moving',
   },

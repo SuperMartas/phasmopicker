@@ -141,10 +141,10 @@ const Picker = ({ changePage, resetSession }) => {
         <Box className={css.evidencesButtonsWrapper}>
           <CustomButton type="evidence" color="red" text={EMF} handleClick={handleEvidenceButtonClick} />
           <CustomButton type="evidence" color="green" text={FINGERPRINTS} handleClick={handleEvidenceButtonClick} />
-          <CustomButton type="evidence" color="dodgerblue" text={TEMPERATURE} handleClick={handleEvidenceButtonClick} />
+          <CustomButton type="evidence" color="brown" text={GHOST_ORB} handleClick={handleEvidenceButtonClick} />
           <CustomButton type="evidence" color="purple" text={GHOST_WRITING} handleClick={handleEvidenceButtonClick} />
           <CustomButton type="evidence" color="cadetblue" text={SPIRIT_BOX} handleClick={handleEvidenceButtonClick} />
-          <CustomButton type="evidence" color="brown" text={GHOST_ORB} handleClick={handleEvidenceButtonClick} />
+          <CustomButton type="evidence" color="dodgerblue" text={TEMPERATURE} handleClick={handleEvidenceButtonClick} />
         </Box>
         <Typography variant="h4">Quests</Typography>
         <Box className={css.evidencesButtonsWrapper}>
