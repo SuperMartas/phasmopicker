@@ -28,6 +28,30 @@ export default makeStyles(({ palette }) => ({
     flexWrap: 'wrap',
   },
 
+  probability: {
+    fontSize: 'smaller',
+    marginTop: '0.5rem',
+    textAlign: 'center',
+  },
+
+  best: {
+    color: '#6C6',
+  },
+
+  normal: {
+    color: 'grey',
+  },
+
+  impossible: {
+    color: '#C66',
+  },
+
+  ruledOut: {
+    color: 'grey',
+    opacity: 0.2,
+    textDecoration: 'line-through',
+  },
+
   ghostsWrapper: {
     display: 'flex',
     flexWrap: 'wrap',

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { isEmpty } from 'lodash';
+import { has, isEmpty } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import clipboardCopy from 'clipboard-copy';
 import { send } from '@giantmachines/redux-websocket';
@@ -32,6 +32,7 @@ import {
   sessionIdSelector,
   connectionStatusSelector,
   activeClientsSelector,
+  evidenceProbabilitiesSelector,
 } from '../../selectors';
 
 import {
@@ -47,11 +48,26 @@ import useStyles from './styles';
 const Picker = ({ changePage, resetSession }) => {
   const dispatch = useDispatch();
   const css = useStyles();
+  const evidences = [
+    [EMF, 'red'],
+    [FINGERPRINTS, 'green'],
+    [GHOST_ORB, 'brown'],
+    [GHOST_WRITING, 'purple'],
+    [SPIRIT_BOX, 'cadetblue'],
+    [TEMPERATURE, 'dodgerblue'],
+  ];
 
   const pickerState = useSelector((state) => pickerStateSelector(state));
   const sessionId = useSelector((state) => sessionIdSelector(state));
   const connectionStatus = useSelector((state) => connectionStatusSelector(state));
   const activeClients = useSelector((state) => activeClientsSelector(state));
+  const probabilities = useSelector((state) => evidenceProbabilitiesSelector(state));
+
+  const maxProbability = Math.max(...Object.values(probabilities).filter(probability => probability < 1));
+  const probabilityClassSelector = (probability) => ({
+    0: css.impossible,
+    [maxProbability]: css.best,
+  }[probability] || css.normal);
 
   const [copyHintText, setCopyHintText] = useState('Click to copy');
 
@@ -140,12 +156,14 @@ const Picker = ({ changePage, resetSession }) => {
         </Box>
         <Typography variant="h4">Evidences</Typography>
         <Box className={css.evidencesButtonsWrapper}>
-          <CustomButton type="evidence" color="red" text={EMF} handleClick={handleEvidenceButtonClick} />
-          <CustomButton type="evidence" color="green" text={FINGERPRINTS} handleClick={handleEvidenceButtonClick} />
-          <CustomButton type="evidence" color="brown" text={GHOST_ORB} handleClick={handleEvidenceButtonClick} />
-          <CustomButton type="evidence" color="purple" text={GHOST_WRITING} handleClick={handleEvidenceButtonClick} />
-          <CustomButton type="evidence" color="cadetblue" text={SPIRIT_BOX} handleClick={handleEvidenceButtonClick} />
-          <CustomButton type="evidence" color="dodgerblue" text={TEMPERATURE} handleClick={handleEvidenceButtonClick} />
+          {
+            evidences.map(([evidence, color]) => has(probabilities, evidence) ? (
+              <Box className={probabilities[evidence] === 0 ? css.ruledOut : null} key={evidence}>
+                <CustomButton type="evidence" color={color} text={evidence} handleClick={handleEvidenceButtonClick} />
+                <Typography className={[css.probability, probabilityClassSelector(probabilities[evidence])].join(' ')}>{Math.round(probabilities[evidence] * 100)} %</Typography>
+              </Box>
+            ) : null)
+          }
         </Box>
         <Typography variant="h4">Quests</Typography>
         <Box className={css.evidencesButtonsWrapper}>

@@ -4,3 +4,12 @@ export const TEMPERATURE = 'Temperature';
 export const GHOST_WRITING = 'Ghost Writing';
 export const SPIRIT_BOX = 'Spirit Box';
 export const GHOST_ORB = 'Ghost Orb';
+
+export const EVIDENCES = [
+	EMF,
+	FINGERPRINTS,
+	GHOST_ORB,
+	GHOST_WRITING,
+	SPIRIT_BOX,
+	TEMPERATURE
+];

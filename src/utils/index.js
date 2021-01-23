@@ -1,4 +1,4 @@
-import { filter, difference, pick } from 'lodash';
+import { filter, difference, map, pick } from 'lodash';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
@@ -18,3 +18,5 @@ export const resetSessionIdFromCookies = () => cookies.remove('sessionId');
 export const preparePickerStateForDatabase = (state) => (
   pick(state, ['selectedEvidences', 'evidenceButtons', 'questButtons', 'talksToEveryOne', 'ghostName'])
 );
+
+export const objectFill = (keys, value) => Object.fromEntries(map(keys, key => [key, value]));
