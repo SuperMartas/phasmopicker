@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { has, isEmpty } from 'lodash';
+import { omit, isEmpty } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import clipboardCopy from 'clipboard-copy';
 import { send } from '@giantmachines/redux-websocket';
@@ -32,7 +32,7 @@ import {
   sessionIdSelector,
   connectionStatusSelector,
   activeClientsSelector,
-  evidenceProbabilitiesSelector,
+  ghostCountByEvidenceSelector,
 } from '../../selectors';
 
 import {
@@ -61,13 +61,7 @@ const Picker = ({ changePage, resetSession }) => {
   const sessionId = useSelector((state) => sessionIdSelector(state));
   const connectionStatus = useSelector((state) => connectionStatusSelector(state));
   const activeClients = useSelector((state) => activeClientsSelector(state));
-  const probabilities = useSelector((state) => evidenceProbabilitiesSelector(state));
-
-  const maxProbability = Math.max(...Object.values(probabilities).filter(probability => probability < 1));
-  const probabilityClassSelector = (probability) => ({
-    0: css.impossible,
-    [maxProbability]: css.best,
-  }[probability] || css.normal);
+  const ghostCounts = useSelector((state) => ghostCountByEvidenceSelector(state));
 
   const [copyHintText, setCopyHintText] = useState('Click to copy');
 
@@ -108,6 +102,12 @@ const Picker = ({ changePage, resetSession }) => {
   };
 
   const { ghostName, ghosts, selectedEvidences } = pickerState;
+
+  const maxCount = Math.max(...Object.values(omit(ghostCounts, selectedEvidences)));
+  const countClassSelector = (count) => ({
+    [maxCount]: css.best,
+    0: css.impossible,
+  }[count] || css.normal);
 
   return (
     <Slide direction="right" in mountOnEnter unmountOnExit>
@@ -157,12 +157,17 @@ const Picker = ({ changePage, resetSession }) => {
         <Typography variant="h4">Evidences</Typography>
         <Box className={css.evidencesButtonsWrapper}>
           {
-            evidences.map(([evidence, color]) => has(probabilities, evidence) ? (
-              <Box className={probabilities[evidence] === 0 ? css.ruledOut : null} key={evidence}>
-                <CustomButton type="evidence" color={color} text={evidence} handleClick={handleEvidenceButtonClick} />
-                <Typography className={[css.probability, probabilityClassSelector(probabilities[evidence])].join(' ')}>{Math.round(probabilities[evidence] * 100)} %</Typography>
-              </Box>
-            ) : null)
+            evidences.map(([evidence, color]) =>
+            {
+              const count = ghostCounts[evidence];
+
+              return (
+                <Box className={count ? null : css.ruledOut} key={evidence}>
+                  <CustomButton type="evidence" color={color} text={evidence} handleClick={handleEvidenceButtonClick} />
+                  <Typography className={[css.count, countClassSelector(ghostCounts[evidence])].join(' ')}>{count} {count === 1 ? 'ghost' : 'ghosts'}</Typography>
+                </Box>
+              );
+            })
           }
         </Box>
         <Typography variant="h4">Quests</Typography>

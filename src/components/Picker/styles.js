@@ -28,7 +28,7 @@ export default makeStyles(({ palette }) => ({
     flexWrap: 'wrap',
   },
 
-  probability: {
+  count: {
     fontSize: 'smaller',
     marginTop: '0.5rem',
     textAlign: 'center',
