@@ -119,10 +119,12 @@ const picker = (state = defaultState, action) => {
       if (content.type === SET_PICKER_STATE) {
         const { data } = content;
         const { picker: pickerState } = data;
+        const selectedEvidences = get(pickerState, 'selectedEvidences', state.selectedEvidences);
 
         return {
           ...state,
           ...pickerState,
+          ghosts: filterGhostsByEvidences(ghosts, selectedEvidences),
         };
       }
 
