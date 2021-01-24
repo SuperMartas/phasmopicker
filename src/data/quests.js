@@ -6,6 +6,7 @@ export const MOTION = 'Motion';
 export const TEMPERATURE = 'Temperature';
 export const CRUCIFIX = 'Crucifix';
 export const EMF = 'EMF';
+export const SALT = 'Salt';
 export const SMUDGE = 'Smudge';
 
 const quests = [
@@ -15,6 +16,7 @@ const quests = [
 	EVENT,
 	MOTION,
 	PHOTO,
+	SALT,
 	SINK,
 	SMUDGE,
 	TEMPERATURE,
