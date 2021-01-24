@@ -28,7 +28,6 @@ function* removeSession() {
 }
 
 function* handlePickerChange() {
-  yield delay(800);
   const sessionId = yield select(sessionIdSelector);
   const picker = yield select(pickerStateSelector);
   const connectionStatus = yield select(connectionStatusSelector);
