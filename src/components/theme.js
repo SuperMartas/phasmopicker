@@ -16,6 +16,11 @@ export default createMuiTheme({
   },
 
   overrides: {
+    MuiLink: {
+      root: {
+        color: '#6CF',
+      }
+    },
     MuiTypography: {
       body1: {
         fontFamily: 'SyneMono',
