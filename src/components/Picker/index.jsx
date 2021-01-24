@@ -22,10 +22,7 @@ import {
   GHOST_WRITING, SPIRIT_BOX, GHOST_ORB,
 } from '../../data/evidences';
 
-import {
-  EMF as EMF_QUEST, TEMPERATURE as TEMPERATURE_QUEST,
-  CRUCIFIX, EVENT, MOTION, PHOTO, SINK, SMUDGE,
-} from '../../data/quests';
+import quests from '../../data/quests';
 
 import {
   pickerStateSelector,
@@ -172,14 +169,11 @@ const Picker = ({ changePage, resetSession }) => {
         </Box>
         <Typography variant="h4">Quests</Typography>
         <Box className={css.evidencesButtonsWrapper}>
-          <CustomButton type="quest" color="grey" text={CRUCIFIX} handleClick={handleQuestButtonClick} />
-          <CustomButton type="quest" color="grey" text={EMF_QUEST} handleClick={handleQuestButtonClick} />
-          <CustomButton type="quest" color="grey" text={EVENT} handleClick={handleQuestButtonClick} />
-          <CustomButton type="quest" color="grey" text={MOTION} handleClick={handleQuestButtonClick} />
-          <CustomButton type="quest" color="grey" text={PHOTO} handleClick={handleQuestButtonClick} />
-          <CustomButton type="quest" color="grey" text={SINK} handleClick={handleQuestButtonClick} />
-          <CustomButton type="quest" color="grey" text={SMUDGE} handleClick={handleQuestButtonClick} />
-          <CustomButton type="quest" color="grey" text={TEMPERATURE_QUEST} handleClick={handleQuestButtonClick} />
+          {
+            quests.map((quest) => (
+              <CustomButton type="quest" color="grey" key={quest} text={quest} handleClick={handleQuestButtonClick} />
+            ))
+          }
         </Box>
         <Grid container className={css.ghostsWrapper}>
           {
