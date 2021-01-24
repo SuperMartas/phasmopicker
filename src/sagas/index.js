@@ -1,5 +1,5 @@
 import {
-  put, takeEvery, select, takeLatest, delay,
+  put, takeEvery, select, takeLatest,
 } from 'redux-saga/effects';
 
 import { disconnect, send } from '@giantmachines/redux-websocket';
