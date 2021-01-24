@@ -27,7 +27,7 @@
     "start": "react-scripts start",
     "dev": "REACT_APP_ENV=dev react-scripts start",
     "deploy-local": "REACT_APP_ENV=prod react-scripts build && cp -r build ~/Projects/phasmoback/client/",
-    "deploy-sm": "cross-env REACT_APP_ENV=prod REACT_APP_WS_HOST=wss://phasmopicker.supermartas.cz/ws/ react-scripts build && scp -r build/* sm@weblogeri.cz:/var/www/phasmopicker.supermartas.cz/web/ && ssh sm@weblogeri.cz \"/usr/bin/sudo /bin/chown -R web99:client2 /var/www/phasmopicker.supermartas.cz/web/\"",
+    "deploy-sm": "cross-env REACT_APP_ENV=prod REACT_APP_WS_HOST=wss://phasmopicker.supermartas.cz/ws/ react-scripts build && ssh sm@weblogeri.cz \"/usr/bin/sudo /bin/rm -r /var/www/phasmopicker.supermartas.cz/web/*\" && scp -r build/* sm@weblogeri.cz:/var/www/phasmopicker.supermartas.cz/web/ && ssh sm@weblogeri.cz \"/usr/bin/sudo /bin/chown -R web99:client2 /var/www/phasmopicker.supermartas.cz/web/\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "eslint .",
