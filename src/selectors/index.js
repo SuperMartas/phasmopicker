@@ -1,5 +1,5 @@
+import evidences from '../data/evidences';
 import { countBy, flatten } from 'lodash';
-import { EVIDENCES } from '../data/evidences';
 import { objectFill } from '../utils';
 
 export const pageSelector = (state) => state.app.page;
@@ -43,6 +43,6 @@ export const sessionErrorSelector = (state) => state.session.lastError;
 export const activeClientsSelector = (state) => state.session.activeClients;
 
 export const ghostCountByEvidenceSelector = (state) => {
-  const evidences = flatten(state.picker.ghosts.map(ghost => ghost.evidences));
-  return { ...objectFill(EVIDENCES, 0), ...countBy(evidences) };
+  const activeEvidences = flatten(state.picker.ghosts.map(ghost => ghost.evidences));
+  return { ...objectFill(evidences, 0), ...countBy(activeEvidences) };
 };

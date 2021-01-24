@@ -5,7 +5,7 @@ export const GHOST_WRITING = 'Ghost Writing';
 export const SPIRIT_BOX = 'Spirit Box';
 export const GHOST_ORB = 'Ghost Orb';
 
-export const EVIDENCES = [
+const evidences = [
 	EMF,
 	FINGERPRINTS,
 	GHOST_ORB,
@@ -13,3 +13,5 @@ export const EVIDENCES = [
 	SPIRIT_BOX,
 	TEMPERATURE
 ];
+
+export default evidences;
