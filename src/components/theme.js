@@ -21,6 +21,20 @@ export default createMuiTheme({
         color: '#6CF',
       }
     },
+    MuiFormLabel: {
+      root: {
+        '&.Mui-focused': {
+          color: 'rgba(255, 255, 255, 0.7)',
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      root: {
+        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: 'grey',
+        },
+      },
+    },
     MuiTypography: {
       body1: {
         fontFamily: 'SyneMono',
