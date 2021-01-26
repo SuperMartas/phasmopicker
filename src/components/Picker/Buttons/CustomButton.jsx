@@ -1,23 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 
 import { Button } from '@material-ui/core';
 
 import useStyles from './styles';
 
-import { isActiveButtonSelector } from '../../../selectors';
-
 const CustomButton = ({
-  type, text, handleClick, ...props
+  isActive = false, text, className, handleClick, ...props
 }) => {
   const css = useStyles(props);
+  const classes = [css.button];
 
-  const isActive = useSelector((state) => isActiveButtonSelector(state, type, text));
+  if (className)
+    classes.push(className);
+
+  if (isActive)
+    classes.push(css.selected);
 
   return (
     <Button
-      className={isActive ? css.buttonSelected : css.button}
+      className={classes.join(' ')}
       onClick={() => handleClick(text, !isActive)}
     >
       {text}
@@ -26,7 +28,7 @@ const CustomButton = ({
 };
 
 CustomButton.propTypes = {
-  type: PropTypes.string.isRequired,
+  isActive: PropTypes.bool,
   text: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired,
 };

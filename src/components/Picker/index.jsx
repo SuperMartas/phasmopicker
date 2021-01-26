@@ -17,10 +17,14 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Divider from '@material-ui/core/Divider';
 
-import {
-  EMF, FINGERPRINTS, TEMPERATURE,
+import evidences, {
+  EMF, FINGERPRINTS, FREEZING,
   GHOST_WRITING, SPIRIT_BOX, GHOST_ORB,
 } from '../../data/evidences';
+
+import {
+  UNKNOWN, FOUND, RULED_OUT
+} from "../../data/evidenceStates";
 
 import quests from '../../data/quests';
 
@@ -29,7 +33,9 @@ import {
   sessionIdSelector,
   connectionStatusSelector,
   activeClientsSelector,
+  filteredGhostsSelector,
   ghostCountByEvidenceSelector,
+  selectedEvidenceSelector,
 } from '../../selectors';
 
 import {
@@ -45,20 +51,22 @@ import useStyles from './styles';
 const Picker = ({ changePage, resetSession }) => {
   const dispatch = useDispatch();
   const css = useStyles();
-  const evidences = [
-    [EMF, 'red'],
-    [FINGERPRINTS, 'green'],
-    [GHOST_ORB, 'brown'],
-    [GHOST_WRITING, 'purple'],
-    [SPIRIT_BOX, 'cadetblue'],
-    [TEMPERATURE, 'dodgerblue'],
-  ];
+  const evidenceColors = {
+    [EMF]: 'red',
+    [FINGERPRINTS]: 'green',
+    [FREEZING]: 'dodgerblue',
+    [GHOST_ORB]: 'brown',
+    [GHOST_WRITING]: 'purple',
+    [SPIRIT_BOX]: 'cadetblue',
+  };
 
   const pickerState = useSelector((state) => pickerStateSelector(state));
   const sessionId = useSelector((state) => sessionIdSelector(state));
   const connectionStatus = useSelector((state) => connectionStatusSelector(state));
   const activeClients = useSelector((state) => activeClientsSelector(state));
+  const ghosts = useSelector((state) => filteredGhostsSelector(state));
   const ghostCounts = useSelector((state) => ghostCountByEvidenceSelector(state));
+  const selectedEvidences = useSelector((state) => selectedEvidenceSelector(state));
 
   const [copyHintText, setCopyHintText] = useState('Click to copy');
 
@@ -72,8 +80,12 @@ const Picker = ({ changePage, resetSession }) => {
     dispatch(updateGhostName(name));
   };
 
+  const handleRuleOutButtonClick = (evidence, isActive) => {
+    dispatch(filterGhosts(evidence, isActive ? RULED_OUT : UNKNOWN));
+  };
+
   const handleEvidenceButtonClick = (evidence, isActive) => {
-    dispatch(filterGhosts(evidence, isActive));
+    dispatch(filterGhosts(evidence, isActive ? FOUND : UNKNOWN));
   };
 
   const handleQuestButtonClick = (quest, isActive) => {
@@ -98,7 +110,7 @@ const Picker = ({ changePage, resetSession }) => {
     });
   };
 
-  const { ghostName, ghosts, selectedEvidences } = pickerState;
+  const { ghostName, evidenceButtons, questButtons, talksToEveryOne } = pickerState;
 
   const maxCount = Math.max(...Object.values(omit(ghostCounts, selectedEvidences)));
   const countClassSelector = (count) => ({
@@ -148,20 +160,29 @@ const Picker = ({ changePage, resetSession }) => {
             value={ghostName}
             onChange={(e) => handleGhostNameChange(e.target.value)}
           />
-          <CustomButton type="talksToEveryOne" color="grey" text="Answers everyone" handleClick={handleAnswersEveryoneButton} />
-          <CustomButton type="reset" color="grey" text="Reset" handleClick={handleReset} />
+          <CustomButton isActive={talksToEveryOne} color="grey" text="Answers everyone" handleClick={handleAnswersEveryoneButton} />
+          <CustomButton color="grey" text="Reset" handleClick={handleReset} />
         </Box>
         <Typography variant="h4">Evidences</Typography>
         <Box className={css.evidencesButtonsWrapper}>
           {
-            evidences.map(([evidence, color]) =>
+            evidences.map((evidence) =>
             {
+              const evidenceState = evidenceButtons[evidence];
+              const color = evidenceColors[evidence];
               const count = ghostCounts[evidence];
+              const wrapperClasses = [css.evidenceWrapper];
+
+              if (!count)
+                wrapperClasses.push(css.ruledOut);
 
               return (
-                <Box className={count ? null : css.ruledOut} key={evidence}>
-                  <CustomButton type="evidence" color={color} text={evidence} handleClick={handleEvidenceButtonClick} />
-                  <Typography className={[css.count, countClassSelector(count)].join(' ')}>{count} {count === 1 ? 'ghost' : 'ghosts'}</Typography>
+                <Box key={evidence}>
+                  <CustomButton isActive={evidenceState === RULED_OUT} className={css.xButton} color="grey" text="&times;" handleClick={(_, isActive) => handleRuleOutButtonClick(evidence, isActive)} />
+                  <Box className={wrapperClasses.join(' ')}>
+                    <CustomButton isActive={evidenceState === FOUND} color={color} text={evidence} handleClick={handleEvidenceButtonClick} />
+                    <Typography className={[css.count, countClassSelector(count)].join(' ')}>{count} {count === 1 ? 'ghost' : 'ghosts'}</Typography>
+                  </Box>
                 </Box>
               );
             })
@@ -171,7 +192,7 @@ const Picker = ({ changePage, resetSession }) => {
         <Box className={css.evidencesButtonsWrapper}>
           {
             quests.map((quest) => (
-              <CustomButton type="quest" color="grey" key={quest} text={quest} handleClick={handleQuestButtonClick} />
+              <CustomButton isActive={questButtons[quest]} color="grey" key={quest} text={quest} handleClick={handleQuestButtonClick} />
             ))
           }
         </Box>

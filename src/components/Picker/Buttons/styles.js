@@ -7,9 +7,7 @@ export default makeStyles({
     margin: '0 5px',
   },
 
-  buttonSelected: {
-    color: (props) => props.color,
-    border: '2px solid #C00',
-    margin: '0 5px',
+  selected: {
+    borderColor: '#C00',
   },
 });

@@ -27,6 +27,18 @@ export default makeStyles(({ palette }) => ({
     flexWrap: 'wrap',
   },
 
+  evidenceWrapper: {
+    color: 'grey',
+    transition: 'opacity 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+  },
+
+  xButton: {
+    display: 'block',
+    padding: 0,
+    margin: '0 auto 0.4rem',
+    textAlign: 'center',
+  },
+
   count: {
     fontSize: 'smaller',
     marginTop: '0.5rem',
@@ -46,9 +58,7 @@ export default makeStyles(({ palette }) => ({
   },
 
   ruledOut: {
-    color: 'grey',
     opacity: 0.2,
-    textDecoration: 'line-through',
   },
 
   ghostsWrapper: {
