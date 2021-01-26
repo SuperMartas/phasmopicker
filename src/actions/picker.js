@@ -1,8 +1,8 @@
 export const FILTER_GHOSTS = 'FILTER_GHOSTS';
-export const filterGhosts = (evidence, isActive) => ({
+export const filterGhosts = (evidence, nextState) => ({
   type: FILTER_GHOSTS,
   evidence,
-  isActive,
+  nextState,
 });
 
 export const UPDATE_SELECTED_QUESTS = 'UPDATE_SELECTED_QUESTS';

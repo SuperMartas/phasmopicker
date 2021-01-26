@@ -1,4 +1,4 @@
-import { get, remove } from 'lodash';
+import { get } from 'lodash';
 
 import {
   FILTER_GHOSTS, UPDATE_SELECTED_QUESTS,
@@ -6,41 +6,17 @@ import {
   SET_PICKER_STATE, WEBSOCKET_MESSAGE,
 } from '../actions';
 
+import evidences from "../data/evidences";
+import { UNKNOWN } from "../data/evidenceStates";
+
 import ghosts from '../data/ghosts';
+import quests from "../data/quests";
 
-import {
-  EMF, FINGERPRINTS, TEMPERATURE,
-  GHOST_WRITING, SPIRIT_BOX, GHOST_ORB,
-} from '../data/evidences';
-
-import {
-  EMF as EMF_QUEST, TEMPERATURE as TEMPERATURE_QUEST,
-  CRUCIFIX, EVENT, MOTION, PHOTO, SINK, SMUDGE,
-} from '../data/quests';
-
-import { filterGhostsByEvidences } from '../utils';
+import { filterGhostsByEvidences, objectFill } from '../utils';
 
 const defaultState = {
-  selectedEvidences: [],
-  ghosts,
-  evidenceButtons: {
-    [EMF]: false,
-    [FINGERPRINTS]: false,
-    [TEMPERATURE]: false,
-    [GHOST_WRITING]: false,
-    [SPIRIT_BOX]: false,
-    [GHOST_ORB]: false,
-  },
-  questButtons: {
-    [SINK]: false,
-    [PHOTO]: false,
-    [MOTION]: false,
-    [TEMPERATURE_QUEST]: false,
-    [CRUCIFIX]: false,
-    [EMF_QUEST]: false,
-    [SMUDGE]: false,
-    [EVENT]: false,
-  },
+  evidenceButtons: objectFill(evidences, UNKNOWN),
+  questButtons: objectFill(quests, false),
   talksToEveryOne: false,
   ghostName: '',
 };
@@ -48,35 +24,15 @@ const defaultState = {
 const picker = (state = defaultState, action) => {
   switch (action.type) {
     case FILTER_GHOSTS: {
-      const { evidence, isActive } = action;
-      const { selectedEvidences } = state;
+      const { evidence, nextState } = action;
 
       const updatedButtonsState = {
         ...state.evidenceButtons,
-        [evidence]: isActive,
+        [evidence]: nextState,
       };
-
-      if (isActive) {
-        selectedEvidences.push(evidence);
-
-        const filteredGhosts = filterGhostsByEvidences(ghosts, selectedEvidences);
-
-        return {
-          ...state,
-          ghosts: filteredGhosts,
-          selectedEvidences,
-          evidenceButtons: updatedButtonsState,
-        };
-      }
-
-      remove(selectedEvidences, (el) => el === evidence);
-
-      const filteredGhosts = filterGhostsByEvidences(ghosts, selectedEvidences);
 
       return {
         ...state,
-        ghosts: filteredGhosts,
-        selectedEvidences,
         evidenceButtons: updatedButtonsState,
       };
     }

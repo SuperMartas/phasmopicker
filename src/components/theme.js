@@ -16,6 +16,13 @@ export default createMuiTheme({
   },
 
   overrides: {
+    MuiButton: {
+      root: {
+        border: '2px solid transparent',
+        color: 'grey',
+        margin: '0 5px',
+      },
+    },
     MuiLink: {
       root: {
         color: '#6CF',

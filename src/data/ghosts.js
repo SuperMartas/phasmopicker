@@ -1,19 +1,19 @@
 import {
-  EMF, FINGERPRINTS, TEMPERATURE,
+  EMF, FINGERPRINTS, FREEZING,
   GHOST_WRITING, GHOST_ORB, SPIRIT_BOX,
 } from './evidences';
 
 const ghosts = [
   {
     name: 'Banshee',
-    evidences: [EMF, FINGERPRINTS, TEMPERATURE],
+    evidences: [EMF, FINGERPRINTS, FREEZING],
     strength: 'Only targets one player at a time',
     weakness: 'Hates the Crucifix',
   },
 
   {
     name: 'Demon',
-    evidences: [GHOST_WRITING, SPIRIT_BOX, TEMPERATURE],
+    evidences: [FREEZING, GHOST_WRITING, SPIRIT_BOX],
     strength: 'Extremely aggressive',
     weakness: 'Using the Ouija board to ask questions does not drain sanity',
   },
@@ -27,7 +27,7 @@ const ghosts = [
 
   {
     name: 'Mare',
-    evidences: [GHOST_ORB, SPIRIT_BOX, TEMPERATURE],
+    evidences: [FREEZING, GHOST_ORB, SPIRIT_BOX],
     strength: 'Attacks more frequently in the dark, tends to switch off lights',
     weakness: 'Keeping the lights on',
   },
@@ -41,7 +41,7 @@ const ghosts = [
 
   {
     name: 'Phantom',
-    evidences: [EMF, GHOST_ORB, TEMPERATURE],
+    evidences: [EMF, FREEZING, GHOST_ORB],
     strength: 'Looking at the Phantom will reduce your sanity',
     weakness: 'Capturing a photo will cause it to disappear, not during a hunt',
   },
@@ -76,14 +76,14 @@ const ghosts = [
 
   {
     name: 'Wraith',
-    evidences: [FINGERPRINTS, SPIRIT_BOX, TEMPERATURE],
+    evidences: [FINGERPRINTS, FREEZING, SPIRIT_BOX],
     strength: 'Can fly through walls and does not leave footprints',
     weakness: 'Salt is toxic for Wraith',
   },
 
   {
     name: 'Yurei',
-    evidences: [GHOST_ORB, GHOST_WRITING, TEMPERATURE],
+    evidences: [FREEZING, GHOST_ORB, GHOST_WRITING],
     strength: 'Drains player sanity especially quickly',
     weakness: 'Smudge stick in the same room will stop the Yurei from moving',
   },
