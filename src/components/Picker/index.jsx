@@ -161,7 +161,7 @@ const Picker = ({ changePage, resetSession }) => {
               return (
                 <Box className={count ? null : css.ruledOut} key={evidence}>
                   <CustomButton type="evidence" color={color} text={evidence} handleClick={handleEvidenceButtonClick} />
-                  <Typography className={[css.count, countClassSelector(ghostCounts[evidence])].join(' ')}>{count} {count === 1 ? 'ghost' : 'ghosts'}</Typography>
+                  <Typography className={[css.count, countClassSelector(count)].join(' ')}>{count} {count === 1 ? 'ghost' : 'ghosts'}</Typography>
                 </Box>
               );
             })
