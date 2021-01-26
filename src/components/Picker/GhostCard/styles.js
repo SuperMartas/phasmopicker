@@ -22,7 +22,7 @@ export default makeStyles(() => ({
   },
 
   strengthWrapper: {
-    minHeight: '7rem',
+    minHeight: '6.5rem',
     color: '#C66'
   },
 

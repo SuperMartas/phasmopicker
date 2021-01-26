@@ -23,7 +23,7 @@ export default makeStyles(({ palette }) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '20px px',
+    marginBottom: '1rem',
     flexWrap: 'wrap',
   },
 
@@ -66,6 +66,7 @@ export default makeStyles(({ palette }) => ({
     flexWrap: 'wrap',
     alignContent: 'center',
     justifyContent: 'center',
+    marginTop: '-1rem',
     padding: '0 50px',
   },
 
