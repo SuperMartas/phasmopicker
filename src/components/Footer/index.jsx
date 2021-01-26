@@ -12,7 +12,7 @@ const Footer = ({ handleClick }) => {
   return (
     <div className={css.footer}>
       <Typography>
-        App is created by <Link href="https://github.com/Dzybaty" target="_blank" rel="noopener" color="info.dark">dzybaty</Link> & modified by <Link href="https://supermartas.cz/" target="_blank" rel="noopener">SuperMartas</Link>
+        App is created by <Link href="https://github.com/Dzybaty" target="_blank" rel="noopener">dzybaty</Link> & modified by <Link href="https://supermartas.cz/" target="_blank" rel="noopener">SuperMartas</Link>
       </Typography>
     </div>
   );
