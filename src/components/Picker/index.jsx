@@ -68,7 +68,7 @@ const Picker = ({ changePage, resetSession }) => {
   const ghostCounts = useSelector((state) => ghostCountByEvidenceSelector(state));
   const selectedEvidences = useSelector((state) => selectedEvidenceSelector(state));
 
-  const [copyHintText, setCopyHintText] = useState('Click to copy');
+  const [copyHintText, setCopyHintText] = useState('Click to copy URL');
 
   useEffect(() => {
     if (connectionStatus) {
@@ -101,11 +101,16 @@ const Picker = ({ changePage, resetSession }) => {
   };
 
   const handleCopySessionIdClick = () => {
-    clipboardCopy(sessionId).then(() => {
+    let url = window.location.href;
+    url = url.substring(0, url.lastIndexOf('/') + 1);
+    url = url.replace(/\/+(\d{6})\/*$/, '');
+    url += '/' + sessionId + '/';
+
+    clipboardCopy(url).then(() => {
       setCopyHintText('Copied to clipboard!');
 
       setTimeout(() => {
-        setCopyHintText('Click to copy');
+        setCopyHintText('Click to copy URL');
       }, 5000);
     });
   };

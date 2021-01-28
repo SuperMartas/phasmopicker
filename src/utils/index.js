@@ -11,6 +11,11 @@ export const getSessionIdFromCookies = () => cookies.get('sessionId');
 
 export const resetSessionIdFromCookies = () => cookies.remove('sessionId');
 
+export const getSessionIdFromUrl = () => {
+  const matches = window.location.href.match(/\/+(\d{6})\/*$/);
+  return matches ? matches[1] : null;
+};
+
 export const preparePickerStateForDatabase = (state) => (
   pick(state, ['evidenceButtons', 'questButtons', 'talksToEveryOne', 'ghostName'])
 );

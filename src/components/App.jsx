@@ -10,7 +10,7 @@ import { changePage, resetSession } from '../actions';
 
 import { pageSelector, connectionStatusSelector } from '../selectors';
 
-import { getSessionIdFromCookies } from '../utils';
+import { getSessionIdFromCookies, getSessionIdFromUrl } from '../utils';
 
 import Picker from './Picker';
 import Questions from './Questions';
@@ -27,6 +27,12 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const sessionIdCookie = getSessionIdFromCookies();
+  const sessionIdUrl = getSessionIdFromUrl();
+  const [join, setJoin] = useState(!!sessionIdUrl);
+
+  useEffect(() => {
+    setJoin(false);
+  }, [setJoin]);
 
   useEffect(() => {
     if (!connectionStatus && sessionIdCookie && sessionIdCookie !== '') {
@@ -75,7 +81,7 @@ const App = () => {
         return <Questions changePage={handleChangePage} />;
       default:
         return (
-          <Login wsConnect={() => dispatch(connect(process.env.REACT_APP_WS_HOST))} />
+          <Login join={join} sessionId={sessionIdUrl} wsConnect={() => dispatch(connect(process.env.REACT_APP_WS_HOST))} />
         );
     }
   };

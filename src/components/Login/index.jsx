@@ -24,19 +24,25 @@ import { getSessionIdFromCookies, setSessionIdCookie } from '../../utils';
 
 import useStyles from './styles';
 
-const Login = ({ wsConnect }) => {
+const Login = ({ join = false, sessionId, wsConnect }) => {
   const dispatch = useDispatch();
   const css = useStyles();
 
-  const [sessionInputValue, setSessionInputValue] = useState('');
-  const [isJoinButtonPressed, setIsJoinButtonPressed] = useState(false);
-  const [isJoiningInProgress, setIsJoiningInProgress] = useState(false);
+  const [sessionInputValue, setSessionInputValue] = useState(sessionId || '');
+  const [isJoinButtonPressed, setIsJoinButtonPressed] = useState(join);
+  const [isJoiningInProgress, setIsJoiningInProgress] = useState(join);
 
   const sessionIdCookie = getSessionIdFromCookies();
   const storedSessionId = useSelector((state) => sessionIdSelector(state));
   const connectionStatus = useSelector((state) => connectionStatusSelector(state));
   const isExistingSession = useSelector((state) => isExistingSessionSelector(state));
   const sessionError = useSelector((state) => sessionErrorSelector(state));
+
+  useEffect(() => {
+    if (join) {
+      wsConnect();
+    }
+  }, [join, wsConnect]);
 
   useEffect(() => {
     if (sessionIdCookie && sessionIdCookie !== '') {
@@ -170,6 +176,8 @@ const Login = ({ wsConnect }) => {
 };
 
 Login.propTypes = {
+  join: PropTypes.bool,
+  sessionId: PropTypes.string,
   wsConnect: PropTypes.func.isRequired,
 };
 
