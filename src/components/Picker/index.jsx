@@ -103,7 +103,7 @@ const Picker = ({ changePage, resetSession }) => {
   const handleCopySessionIdClick = () => {
     let url = window.location.href;
     url = url.substring(0, url.lastIndexOf('/') + 1);
-    url = url.replace(/\/+(\d{6})\/*$/, '');
+    url = url.replace(/\/+((\d{6})\/*)?$/, '');
     url += '/' + sessionId + '/';
 
     clipboardCopy(url).then(() => {
