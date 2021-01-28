@@ -1,7 +1,7 @@
 import evidences from '../data/evidences';
 import { FOUND, RULED_OUT, UNKNOWN } from "../data/evidenceStates";
 import ghosts from "../data/ghosts";
-import { countBy, difference, filter, flatten ,pickBy } from 'lodash';
+import { countBy, difference, flatten ,pickBy } from 'lodash';
 import { objectFill } from '../utils';
 
 export const pageSelector = (state) => state.app.page;
