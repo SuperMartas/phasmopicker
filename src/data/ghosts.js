@@ -56,7 +56,7 @@ const ghosts = [
   {
     name: 'Revenant',
     evidences: [EMF, FINGERPRINTS, GHOST_WRITING],
-    strength: 'Attacks anyone, regardless of sanity levels',
+    strength: 'Travels twice as fast when chasing player, can switch victim',
     weakness: 'Moves extremely slowly when players hide',
   },
 
