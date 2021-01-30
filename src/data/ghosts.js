@@ -15,7 +15,7 @@ const ghosts = [
     name: 'Demon',
     evidences: [FREEZING, GHOST_WRITING, SPIRIT_BOX],
     strength: 'Extremely aggressive',
-    weakness: 'Using the Ouija board to ask questions does not drain sanity',
+    weakness: 'Using the Ouija board to ask successful questions does not drain sanity',
   },
 
   {
