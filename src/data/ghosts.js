@@ -71,7 +71,7 @@ const ghosts = [
     name: 'Spirit',
     evidences: [FINGERPRINTS, GHOST_WRITING, SPIRIT_BOX],
     strength: 'No strengths',
-    weakness: 'Using smudge sticks stops from starting for a long time',
+    weakness: 'Using smudge sticks stops from starting hunt for a long time',
   },
 
   {
