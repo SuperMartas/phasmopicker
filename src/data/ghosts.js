@@ -85,7 +85,7 @@ const ghosts = [
     name: 'Yurei',
     evidences: [FREEZING, GHOST_ORB, GHOST_WRITING],
     strength: 'Drains player sanity especially quickly',
-    weakness: 'Smudge stick in the same room will stop the Yurei from moving',
+    weakness: 'Smudge stick in the same room will stop the Yurei from wandering',
   },
 ];
 
